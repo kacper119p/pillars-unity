@@ -14,16 +14,19 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text gameOverText;
     [SerializeField] private GameObject[] enemies;
     [SerializeField] private GameObject player;
+    [SerializeField] private TMP_Text ScoreDisplay;
+    public int score;
     void Start()
     {
         isPlaying = false;
+        score = 0;
         InvokeRepeating("SpawnEnemy", 0, 1);
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        ScoreDisplay.SetText("Score: " + score);
     }
 
     private void SpawnEnemy()

@@ -6,10 +6,12 @@ public abstract class Enemy : MonoBehaviour // INHERITANCE
 {
     protected float speed = 3.0f;
     protected GameObject player;
+    protected GameManager gameManager;
 
     private void Awake()
     {
         player = GameObject.Find("Player");
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
     void Update()
     {
@@ -24,6 +26,7 @@ public abstract class Enemy : MonoBehaviour // INHERITANCE
         {
             Destroy(gameObject);
             Destroy(collision.gameObject);
+            gameManager.score++;
         }
     }
 }
