@@ -14,12 +14,14 @@ public class PlayerController : MonoBehaviour
     private float cooldown = 0.25f;
     private float currentCooldown;
     private bool isOnCooldown;
+    [SerializeField] GameManager gameManager;
 
     private void Start()
     {
         currentCooldown = 0.0f;
         isOnCooldown = false;
         rotation = Quaternion.Euler(0, 0, 0);
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -119,5 +121,14 @@ public class PlayerController : MonoBehaviour
     {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+            gameManager.EndGame();
+        }
     }
 }
